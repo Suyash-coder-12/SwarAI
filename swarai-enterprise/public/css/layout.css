@@ -1,0 +1,98 @@
+.app-container {
+  display: grid;
+  grid-template-columns: 280px 1fr 340px;
+  grid-template-rows: 80px 1fr;
+  grid-template-areas:
+    "header header header"
+    "sidebar main right-panel";
+  height: 100vh;
+  width: 100vw;
+  padding: 16px;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.app-header {
+  grid-area: header;
+  background: var(--bg-hud);
+  border: 1px solid var(--bg-hud-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--hud-radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.app-sidebar {
+  grid-area: sidebar;
+  background: var(--bg-hud);
+  border: 1px solid var(--bg-hud-border);
+  backdrop-filter: blur(20px);
+  border-radius: var(--hud-radius);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.app-main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.view-section {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+.view-section.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.app-right-panel {
+  grid-area: right-panel;
+  background: var(--bg-hud);
+  border: 1px solid var(--bg-hud-border);
+  backdrop-filter: blur(20px);
+  border-radius: var(--hud-radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 1300px) {
+  .app-container {
+    grid-template-columns: 260px 1fr;
+    grid-template-areas:
+      "header header"
+      "sidebar main";
+  }
+  .app-right-panel { display: none; }
+}
+
+@media (max-width: 800px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+  .app-sidebar { display: none; }
+}

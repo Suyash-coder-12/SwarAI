@@ -1,0 +1,39 @@
+:root {
+  /* Core Backgrounds */
+  --bg-core: #f8fafc; /* Slate 50 */
+  --bg-hud: rgba(255, 255, 255, 0.9); /* White with opacity for glassmorphism */
+  --bg-hud-solid: #ffffff;
+  --bg-hud-border: rgba(148, 163, 184, 0.25); /* Subtle Slate 400 */
+  --bg-hud-highlight: rgba(241, 245, 249, 1); /* Slate 100 */
+  
+  /* Text */
+  --text-core: #0f172a; /* Slate 900 */
+  --text-muted: #64748b; /* Slate 500 */
+  --text-bright: #000000;
+  
+  /* Accents */
+  --neon-cyan: #2563eb; /* Blue 600 */
+  --neon-cyan-glow: rgba(37, 99, 235, 0.15);
+  --neon-purple: #4f46e5; /* Indigo 600 */
+  --neon-purple-glow: rgba(79, 70, 229, 0.15);
+  
+  /* Status */
+  --alert-red: #ef4444; /* Red 500 */
+  --alert-red-glow: rgba(239, 68, 68, 0.15);
+  --status-green: #10b981; /* Emerald 500 */
+  --status-green-glow: rgba(16, 185, 129, 0.15);
+  --status-warn: #f59e0b; /* Amber 500 */
+  
+  /* Typography */
+  --font-data: 'JetBrains Mono', 'Space Grotesk', monospace, system-ui;
+  --font-ui: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  
+  /* Layout */
+  --hud-radius: 12px;
+  --hud-radius-lg: 16px;
+  
+  /* Animations */
+  --anim-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --anim-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
