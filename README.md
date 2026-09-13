@@ -34,7 +34,7 @@ cd go-engine
 go mod download
 go run cmd/server/main.go
 ```
-The Go engine will start listening on `http://localhost:9000`.
+The Go engine will start listening on `localhost`.
 
 ### 2. Setup the Enterprise Interface
 
@@ -45,7 +45,7 @@ cd swarai-enterprise
 composer install
 php -S localhost:8000 -t public
 ```
-The interface will be available at `http://localhost:8000`.
+The interface will be available at `No Live Link Available, We are Working on it Locally`.
 
 ## Usage
 
