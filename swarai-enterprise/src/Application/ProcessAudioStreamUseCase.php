@@ -9,7 +9,8 @@ class ProcessAudioStreamUseCase {
         
         try {
             // Forward audio processing to the Go Microservice
-            $response = $client->post('http://localhost:9000/api/process', [
+            $goEngineUrl = getenv('GO_ENGINE_URL') ?: 'http://localhost:9000';
+            $response = $client->post($goEngineUrl . '/api/process', [
                 'json' => [
                     'audio_data' => base64_encode(file_get_contents($audioFilePath))
                 ]

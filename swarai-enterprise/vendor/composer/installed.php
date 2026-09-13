@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'beatsvibe/swarai-enterprise',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'f0c74414e876e843f322eb9747e8c9709e24f636',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'beatsvibe/swarai-enterprise' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'f0c74414e876e843f322eb9747e8c9709e24f636',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

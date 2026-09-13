@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  go-engine:
+    build:
+      context: ./go-engine
+    ports:
+      - "9000:9000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+
+  swarai-enterprise:
+    build:
+      context: ./swarai-enterprise
+    ports:
+      - "8000:80"
+    environment:
+      - GO_ENGINE_URL=http://localhost:9000
+    depends_on:
+      - go-engine

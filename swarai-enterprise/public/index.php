@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/Core/Application.php';
 
+$goEngineUrl = getenv('GO_ENGINE_URL') ?: 'http://localhost:9000';
+
 if ($_SERVER['REQUEST_URI'] === '/api/health') {
     header('Content-Type: application/json');
     echo json_encode(['status' => 'online']);
@@ -22,6 +24,7 @@ if ($_SERVER['REQUEST_URI'] === '/api/health') {
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components/components.css">
+  <script>window.GO_ENGINE_URL = "<?= htmlspecialchars($goEngineUrl) ?>";</script>
 </head>
 <body>
   <div class="app-container">

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const base64data = reader.result.split(',')[1];
             
             try {
-              const response = await fetch('http://localhost:9000/api/process', {
+              const response = await fetch(`${window.GO_ENGINE_URL}/api/process`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
