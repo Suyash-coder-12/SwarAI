@@ -50,7 +50,7 @@ The interface will be available at `No Live Link Available, We are Working on it
 ## Usage
 
 1. Ensure both the Go engine and the PHP frontend are running.
-2. Open your browser and navigate to "Working on it"
+2. working on it
 4. Use the interface to initiate an audio ingestion sequence. The frontend will capture the audio and send it to the Go backend.
 5. The Go backend processes the audio, interfaces with the Gemini API, and returns the translated Hindi text, which is then displayed on the UI terminal.
 
