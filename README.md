@@ -93,8 +93,8 @@ flowchart TB
 
     %% Inter-Layer Communications
     B64 -->|REST API Call| API_GW
-    PAYLOAD -->|gRPC/HTTP2| GENAI_SDK
-    GEMINI -->|JSON Response (Hindi Text)| WORKER_POOL
+    PAYLOAD -->|gRPC / HTTP2| GENAI_SDK
+    GEMINI -->|JSON Response - Hindi Text| WORKER_POOL
     WORKER_POOL -->|HTTP 200 Response| DOM
     
     %% Relationships
