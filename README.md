@@ -1,94 +1,108 @@
-### 🌌 THE MASTER BLUEPRINT: OMNI-SYSTEM ARCHITECTURE
-This master schematic visualizes the entire data lifecycle of SwarAI—from hardware microphone ingestion to neural processing in the cloud, all the way back to the UI terminal glitch render.
+<div align="center">
+  <img src="https://via.placeholder.com/1000x200/ffffff/333333?text=SwarAI+Audio+Translation+Pipeline" alt="SwarAI Banner">
 
+  <h1>SwarAI: Real-Time Audio Translation Pipeline</h1>
+  <p><b>An enterprise-grade, low-latency speech-to-text translation engine powered by Go and Gemini AI.</b></p>
+  
+  <p>
+    <img src="https://img.shields.io/badge/Backend-Go_1.21+-00ADD8?style=for-the-badge&logo=go" alt="Go">
+    <img src="https://img.shields.io/badge/Frontend-PHP_8.1+-777BB4?style=for-the-badge&logo=php" alt="PHP">
+    <img src="https://img.shields.io/badge/LLM-Gemini_3.7_Flash-FF6F00?style=for-the-badge&logo=google" alt="Gemini">
+    <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge" alt="Build">
+    <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
+  </p>
+</div>
+
+---
+
+## 📑 Table of Contents
+1. [Project Overview](#-project-overview)
+2. [System Architecture](#-system-architecture)
+3. [Core Capabilities](#-core-capabilities)
+4. [Technology Stack](#-technology-stack)
+5. [Getting Started (Installation)](#-getting-started-installation)
+6. [API Documentation](#-api-documentation)
+7. [Directory Structure](#-directory-structure)
+8. [Roadmap](#-roadmap)
+
+---
+
+## 🚀 Project Overview
+
+**SwarAI** is a robust, real-time audio processing pipeline designed to seamlessly translate English speech into Hindi text. Built with scalability in mind, it leverages a highly concurrent **Go (Golang)** backend to process base64-encoded audio streams and interfaces with Google's **Gemini 3.7 Flash** model for highly accurate, context-aware translation. The presentation layer is managed by a lightweight, interactive **PHP and Vanilla JavaScript** dashboard that provides real-time acoustic feedback and processing metrics.
+
+---
+
+## 📐 System Architecture
+
+The system follows a microservice-oriented architecture, strictly decoupling the client interface from the heavy processing engine.
+
+### Comprehensive Data Flow & System Map
 ```mermaid
 flowchart TB
-    %% Cyberpunk Styling Variables
-    classDef user fill:#050a1f,stroke:#00ffcc,stroke-width:2px,color:#00ffcc;
-    classDef frontend fill:#111,stroke:#777BB4,stroke-width:2px,color:#fff;
-    classDef network fill:#000,stroke:#ff0055,stroke-width:2px,color:#ff0055,stroke-dasharray: 5 5;
-    classDef backend fill:#001a22,stroke:#00ADD8,stroke-width:3px,color:#fff;
-    classDef ai fill:#331100,stroke:#FF6F00,stroke-width:3px,color:#fff;
-    classDef telemetry fill:#0a0a0a,stroke:#00ffcc,stroke-width:1px,color:#00ffcc;
+    %% Styling
+    classDef client fill:#f8f9fa,stroke:#ced4da,stroke-width:2px,color:#212529;
+    classDef frontend fill:#e3f2fd,stroke:#90caf9,stroke-width:2px,color:#0d47a1;
+    classDef backend fill:#e0f7fa,stroke:#4dd0e1,stroke-width:2px,color:#006064;
+    classDef external fill:#fff3e0,stroke:#ffb74d,stroke-width:2px,color:#e65100;
 
-    %% SECTOR 1: USER HARDWARE
-    subgraph User_Environment ["👤 COMMANDER SECTOR (HARDWARE)"]
-        MIC([fa:fa-microphone Analog Audio Source])
-        BROWSER{Browser Audio Engine}
-        MIC -->|Soundwaves| BROWSER
-    end
-
-    %% SECTOR 2: ENTERPRISE HUD
-    subgraph Frontend_HUD_Matrix ["🖥️ ENTERPRISE HUD (PHP / VANILLA JS)"]
+    %% Client Layer
+    subgraph Client_Layer ["💻 Client Presentation Layer (Browser)"]
         direction TB
-        AUDIO_API[Web Audio API Node]
-        BLOB_GEN[(Audio Blob Generator)]
-        B64_ENC[Base64 Cipher Encoder]
-        UI_STATE{HUD State Manager}
+        MIC([Microphone Input])
+        WEB_AUDIO[Web Audio API]
+        BLOB[Audio Blob Encapsulation]
+        B64[Base64 Stream Encoder]
+        DOM[DOM / UI Renderer]
         
-        BROWSER -->|PCM Stream| AUDIO_API
-        AUDIO_API -->|MediaRecorder| BLOB_GEN
-        BLOB_GEN -->|audio/webm| B64_ENC
-        AUDIO_API -.->|Frequency Data| UI_STATE
+        MIC --> WEB_AUDIO
+        WEB_AUDIO --> BLOB
+        BLOB --> B64
     end
 
-    %% SECTOR 3: NETWORK LAYER
-    subgraph Network_Gateway ["🌐 SECURE GATEWAY OVERLAY"]
-        CORS{CORS Policy Matrix}
-        RATE_LIMIT[Rate Limiter Node]
-        B64_ENC -->|HTTP POST Request| CORS
-        CORS -->|Validated| RATE_LIMIT
+    %% Application Layer (Frontend Server)
+    subgraph App_Layer ["🌐 Application Layer (PHP - Port: 8000)"]
+        ASSETS[Static Assets Serving]
+        ROUTER[Frontend Router]
     end
 
-    %% SECTOR 4: GO BACKEND CORE
-    subgraph Go_Core_Processing_Cluster ["⚙️ GO HYPER-CORE (PORT: 8080)"]
+    %% Service Layer (Go Backend)
+    subgraph Backend_Layer ["⚙️ Core Processing Engine (Go - Port: 8080)"]
         direction TB
-        MUX[HTTP MUX Router]
-        ROUTINE_POOL{Goroutine Dispatcher}
+        API_GW{API Gateway / MUX}
+        WORKER_POOL{Goroutine Worker Pool}
         
-        subgraph Worker_Node_Alpha ["⚡ Concurrent Worker Node"]
-            DECODER[Base64 -> Byte Array]
-            MEM_BUFFER[(In-Memory Buffer)]
-            PROMPT_BUILDER[AI Context Injector]
+        subgraph Pipeline ["Processing Pipeline"]
+            DECODER[Base64 Decoder]
+            PAYLOAD[Request Payload Builder]
         end
         
-        RATE_LIMIT -->|JSON Payload| MUX
-        MUX -->|Spawn/Assign| ROUTINE_POOL
-        ROUTINE_POOL --> Worker_Node_Alpha
-        DECODER --> MEM_BUFFER
-        MEM_BUFFER --> PROMPT_BUILDER
+        API_GW -->|HTTP POST| WORKER_POOL
+        WORKER_POOL --> DECODER
+        DECODER --> PAYLOAD
     end
 
-    %% SECTOR 5: NEURAL CLOUD
-    subgraph AI_Neural_Network ["🧠 GOOGLE NEURAL CLOUD"]
+    %% Third-Party Services
+    subgraph AI_Layer ["🧠 Cloud AI Services"]
         direction TB
-        GENAI_SDK[genai Go SDK Wrapper]
-        GEMINI_API{Gemini API Gateway}
-        MODEL_37([Gemini 3.7 Flash Model])
-        NLP_ENGINE[Hindi NLP Matrix]
+        GENAI_SDK[Google GenAI SDK]
+        GEMINI([Gemini 3.7 Flash Model])
         
-        PROMPT_BUILDER -->|gRPC / REST Stream| GENAI_SDK
-        GENAI_SDK -->|Auth + Audio Data| GEMINI_API
-        GEMINI_API --> MODEL_37
-        MODEL_37 <-->|Contextualization| NLP_ENGINE
+        GENAI_SDK --> GEMINI
     end
 
-    %% SECTOR 6: TELEMETRY LOOP
-    subgraph Output_Telemetry ["📟 TELEMETRY & FEEDBACK LOOP"]
-        JSON_RES[JSON Response Builder]
-        HUD_DISPLAY[HUD Terminal Decryptor]
-        ANIM_ENGINE[Glitch CSS Render Engine]
-        
-        MODEL_37 -->|Hindi Translation| JSON_RES
-        JSON_RES -->|HTTP 200 OK| HUD_DISPLAY
-        HUD_DISPLAY --> ANIM_ENGINE
-        ANIM_ENGINE --> UI_STATE
-    end
+    %% Inter-Layer Communications
+    B64 -->|REST API Call| API_GW
+    PAYLOAD -->|gRPC/HTTP2| GENAI_SDK
+    GEMINI -->|JSON Response (Hindi Text)| WORKER_POOL
+    WORKER_POOL -->|HTTP 200 Response| DOM
+    
+    %% Relationships
+    Client_Layer -.->|Loads App| App_Layer
+    App_Layer -.-> ASSETS
 
-    %% Applying Cyberpunk Styles
-    class User_Environment,MIC,BROWSER user;
-    class Frontend_HUD_Matrix,AUDIO_API,BLOB_GEN,B64_ENC,UI_STATE frontend;
-    class Network_Gateway,CORS,RATE_LIMIT network;
-    class Go_Core_Processing_Cluster,MUX,ROUTINE_POOL,Worker_Node_Alpha,DECODER,MEM_BUFFER,PROMPT_BUILDER backend;
-    class AI_Neural_Network,GENAI_SDK,GEMINI_API,MODEL_37,NLP_ENGINE ai;
-    class Output_Telemetry,JSON_RES,HUD_DISPLAY,ANIM_ENGINE telemetry;
+    %% Apply Classes
+    class Client_Layer,MIC,WEB_AUDIO,BLOB,B64,DOM client;
+    class App_Layer,ASSETS,ROUTER frontend;
+    class Backend_Layer,API_GW,WORKER_POOL,DECODER,PAYLOAD backend;
+    class AI_Layer,GENAI_SDK,GEMINI external;
