@@ -1,57 +1,94 @@
-<div align="center">
-  <!-- Placeholder for an animated project logo or GIF -->
-  <img src="https://via.placeholder.com/1000x250/050a1f/00ffcc?text=+++SwarAI+++Audio+++Translation+++Matrix+++" alt="SwarAI Banner">
+### 🌌 THE MASTER BLUEPRINT: OMNI-SYSTEM ARCHITECTURE
+This master schematic visualizes the entire data lifecycle of SwarAI—from hardware microphone ingestion to neural processing in the cloud, all the way back to the UI terminal glitch render.
 
-  <h1>🎙️ SwarAI : Enterprise Audio Translation Engine</h1>
-  <p><b>A high-fidelity, real-time English-to-Hindi neural speech processing pipeline.</b></p>
-  
-  <p>
-    <img src="https://img.shields.io/badge/Backend-Go_1.21+-00ADD8?style=for-the-badge&logo=go" alt="Go">
-    <img src="https://img.shields.io/badge/Frontend-PHP_8.1+-777BB4?style=for-the-badge&logo=php" alt="PHP">
-    <img src="https://img.shields.io/badge/Neural_Engine-Gemini_3.7_Flash-FF6F00?style=for-the-badge&logo=google" alt="Gemini">
-    <img src="https://img.shields.io/badge/Telemetry-Online-00ffcc?style=for-the-badge" alt="Status">
-    <img src="https://img.shields.io/badge/License-MIT-success?style=for-the-badge" alt="License">
-  </p>
-</div>
-
----
-
-## 📑 Transmission Index (Table of Contents)
-1. [Project Vision](#-project-vision)
-2. [Technical Topologies & Schematics](#-technical-topologies--schematics)
-3. [Core Feature Matrix](#-core-feature-matrix)
-4. [System Requirements](#-system-requirements)
-5. [Directory Structure](#-directory-structure)
-6. [Ignition Sequence (Installation)](#-ignition-sequence-installation)
-7. [API Telemetry (Documentation)](#-api-telemetry-documentation)
-8. [HUD Interface Guide](#-hud-interface-guide)
-9. [Future Roadmap](#-future-roadmap)
-
----
-
-## 🌌 Project Vision
-
-**SwarAI** is built to bridge the linguistic divide using state-of-the-art AI and high-performance backend infrastructure. Designed with a futuristic Sci-Fi HUD aesthetic, it doesn't just translate language; it provides a visual, real-time telemetry experience of the neural processing sequence. It transforms spoken English into highly accurate Hindi text using Google's `gemini-3.7-flash` model, routed through a blazingly fast Go backend.
-
----
-
-## 📐 Technical Topologies & Schematics
-
-To understand the scale and flow of the SwarAI pipeline, refer to the classified system schematics below.
-
-### 1. High-Level Component Topology
 ```mermaid
-sequenceDiagram
-    participant U as 👤 Commander (User)
-    participant HUD as 🖥️ Enterprise HUD
-    participant CORE as ⚙️ Go Processing Core
-    participant AI as 🧠 Neural Engine (Gemini)
+flowchart TB
+    %% Cyberpunk Styling Variables
+    classDef user fill:#050a1f,stroke:#00ffcc,stroke-width:2px,color:#00ffcc;
+    classDef frontend fill:#111,stroke:#777BB4,stroke-width:2px,color:#fff;
+    classDef network fill:#000,stroke:#ff0055,stroke-width:2px,color:#ff0055,stroke-dasharray: 5 5;
+    classDef backend fill:#001a22,stroke:#00ADD8,stroke-width:3px,color:#fff;
+    classDef ai fill:#331100,stroke:#FF6F00,stroke-width:3px,color:#fff;
+    classDef telemetry fill:#0a0a0a,stroke:#00ffcc,stroke-width:1px,color:#00ffcc;
 
-    U->>HUD: [Voice Uplink Initiated] Speaks English
-    Note over HUD: Acoustic Frequency Mapping<br/>Base64 Stream Conversion
-    HUD->>CORE: POST /api/translate (Base64 Payload)
-    Note over CORE: Payload Verification & Decoding
-    CORE->>AI: Prompt Injection + Audio Blob
-    AI-->>CORE: Contextual Translation (Hindi)
-    CORE-->>HUD: 200 OK: { "status": "success", "hindi": "..." }
-    HUD->>U: Render via Terminal Glitch CSS
+    %% SECTOR 1: USER HARDWARE
+    subgraph User_Environment ["👤 COMMANDER SECTOR (HARDWARE)"]
+        MIC([fa:fa-microphone Analog Audio Source])
+        BROWSER{Browser Audio Engine}
+        MIC -->|Soundwaves| BROWSER
+    end
+
+    %% SECTOR 2: ENTERPRISE HUD
+    subgraph Frontend_HUD_Matrix ["🖥️ ENTERPRISE HUD (PHP / VANILLA JS)"]
+        direction TB
+        AUDIO_API[Web Audio API Node]
+        BLOB_GEN[(Audio Blob Generator)]
+        B64_ENC[Base64 Cipher Encoder]
+        UI_STATE{HUD State Manager}
+        
+        BROWSER -->|PCM Stream| AUDIO_API
+        AUDIO_API -->|MediaRecorder| BLOB_GEN
+        BLOB_GEN -->|audio/webm| B64_ENC
+        AUDIO_API -.->|Frequency Data| UI_STATE
+    end
+
+    %% SECTOR 3: NETWORK LAYER
+    subgraph Network_Gateway ["🌐 SECURE GATEWAY OVERLAY"]
+        CORS{CORS Policy Matrix}
+        RATE_LIMIT[Rate Limiter Node]
+        B64_ENC -->|HTTP POST Request| CORS
+        CORS -->|Validated| RATE_LIMIT
+    end
+
+    %% SECTOR 4: GO BACKEND CORE
+    subgraph Go_Core_Processing_Cluster ["⚙️ GO HYPER-CORE (PORT: 8080)"]
+        direction TB
+        MUX[HTTP MUX Router]
+        ROUTINE_POOL{Goroutine Dispatcher}
+        
+        subgraph Worker_Node_Alpha ["⚡ Concurrent Worker Node"]
+            DECODER[Base64 -> Byte Array]
+            MEM_BUFFER[(In-Memory Buffer)]
+            PROMPT_BUILDER[AI Context Injector]
+        end
+        
+        RATE_LIMIT -->|JSON Payload| MUX
+        MUX -->|Spawn/Assign| ROUTINE_POOL
+        ROUTINE_POOL --> Worker_Node_Alpha
+        DECODER --> MEM_BUFFER
+        MEM_BUFFER --> PROMPT_BUILDER
+    end
+
+    %% SECTOR 5: NEURAL CLOUD
+    subgraph AI_Neural_Network ["🧠 GOOGLE NEURAL CLOUD"]
+        direction TB
+        GENAI_SDK[genai Go SDK Wrapper]
+        GEMINI_API{Gemini API Gateway}
+        MODEL_37([Gemini 3.7 Flash Model])
+        NLP_ENGINE[Hindi NLP Matrix]
+        
+        PROMPT_BUILDER -->|gRPC / REST Stream| GENAI_SDK
+        GENAI_SDK -->|Auth + Audio Data| GEMINI_API
+        GEMINI_API --> MODEL_37
+        MODEL_37 <-->|Contextualization| NLP_ENGINE
+    end
+
+    %% SECTOR 6: TELEMETRY LOOP
+    subgraph Output_Telemetry ["📟 TELEMETRY & FEEDBACK LOOP"]
+        JSON_RES[JSON Response Builder]
+        HUD_DISPLAY[HUD Terminal Decryptor]
+        ANIM_ENGINE[Glitch CSS Render Engine]
+        
+        MODEL_37 -->|Hindi Translation| JSON_RES
+        JSON_RES -->|HTTP 200 OK| HUD_DISPLAY
+        HUD_DISPLAY --> ANIM_ENGINE
+        ANIM_ENGINE --> UI_STATE
+    end
+
+    %% Applying Cyberpunk Styles
+    class User_Environment,MIC,BROWSER user;
+    class Frontend_HUD_Matrix,AUDIO_API,BLOB_GEN,B64_ENC,UI_STATE frontend;
+    class Network_Gateway,CORS,RATE_LIMIT network;
+    class Go_Core_Processing_Cluster,MUX,ROUTINE_POOL,Worker_Node_Alpha,DECODER,MEM_BUFFER,PROMPT_BUILDER backend;
+    class AI_Neural_Network,GENAI_SDK,GEMINI_API,MODEL_37,NLP_ENGINE ai;
+    class Output_Telemetry,JSON_RES,HUD_DISPLAY,ANIM_ENGINE telemetry;
