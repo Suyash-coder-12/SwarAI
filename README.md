@@ -1,59 +1,45 @@
-# SwarAI - Audio Translation Engine
+<div align="center">
+  <!-- Placeholder for an animated project logo or GIF -->
+  <img src="https://via.placeholder.com/600x200/000000/00ffcc?text=++SwarAI+Audio+Engine++" alt="SwarAI Banner">
 
-SwarAI is an advanced, enterprise-grade audio processing and translation pipeline. It features a high-performance Go backend powered by the Gemini AI model to perform real-time English-to-Hindi speech translation, coupled with a futuristic, sci-fi HUD web interface built in PHP and vanilla JavaScript/CSS.
+  <h1>🎙️ SwarAI - Audio Translation Engine</h1>
+  <p><b>Enterprise-grade, real-time English-to-Hindi speech translation pipeline powered by Gemini AI.</b></p>
+  
+  <p>
+    <img src="https://img.shields.io/badge/Backend-Go_1.21+-00ADD8?style=for-the-badge&logo=go" alt="Go">
+    <img src="https://img.shields.io/badge/Frontend-PHP_8.1+-777BB4?style=for-the-badge&logo=php" alt="PHP">
+    <img src="https://img.shields.io/badge/AI-Gemini_3.7_Flash-FF6F00?style=for-the-badge&logo=google" alt="Gemini">
+    <img src="https://img.shields.io/badge/License-MIT-success?style=for-the-badge" alt="License">
+  </p>
+</div>
 
-## Architecture
+## 🌌 Architecture
 
-The system is composed of two primary components:
+The system is composed of two primary, decoupled components:
 
-1. **Go Engine (`go-engine/`)**: A fast and lightweight backend service written in Go. It exposes RESTful APIs to ingest base64-encoded audio streams, processes them using the `google.golang.org/genai` SDK, and translates the English audio to Hindi text via the `gemini-3.7-flash` model.
-2. **Enterprise Interface (`swarai-enterprise/`)**: A highly polished, responsive web application (PHP/JS/CSS) that serves as the command center. It features an interactive UI (HUD overview, acoustic profiling, NMT matrix, and system telemetry) to visualize the audio ingestion and translation process.
+1. **Go Engine (`go-engine/`)**: A fast, lightweight backend service written in Go. It exposes RESTful APIs to ingest base64-encoded audio streams, processes them using the `google.golang.org/genai` SDK, and translates English audio to Hindi text in milliseconds.
+2. **Enterprise Interface (`swarai-enterprise/`)**: A highly polished, responsive web application (PHP/Vanilla JS/CSS) serving as the command center. It features an interactive UI—complete with a HUD overview, acoustic profiling, NMT matrix, and system telemetry—to visualize the translation pipeline in real time.
 
-## Key Features
+## ✨ Key Features
 
-- **Real-Time Translation**: Seamless English-to-Hindi translation using Google's state-of-the-art Gemini model.
-- **Sci-Fi HUD UI**: A visually stunning dashboard featuring live telemetry, parametric frequency visualizers, and system health metrics.
-- **Go-Powered Backend**: A robust HTTP server handling CORS, audio decoding, and API interactions efficiently.
-- **Audio Processing Pipeline**: Handles audio ingestion, base64 decoding, and prompt-engineered interactions with the Gemini API.
+* **⚡ Real-Time Translation**: Seamless English-to-Hindi translation using Google's state-of-the-art `gemini-3.7-flash` model.
+* **🎥 Sci-Fi HUD UI**: A visually stunning dashboard featuring live telemetry, parametric frequency visualizers, and system health metrics.
+* **🚀 Go-Powered Backend**: A robust HTTP server handling CORS, concurrent audio decoding, and low-latency API interactions.
+* **🌊 Audio Processing Pipeline**: Efficiently handles microphone ingestion, base64 encoding/decoding, and prompt-engineered interactions.
 
-## Prerequisites
+## 🛠️ Prerequisites
 
-- **Go** (1.21 or higher) for the engine.
-- **PHP** (8.1 or higher) for the enterprise frontend.
-- **Composer** for PHP dependencies.
-- A valid **Gemini API Key** configured in your environment.
+* **Go** (`v1.21` or higher)
+* **PHP** (`v8.1` or higher)
+* **Composer** (for PHP dependencies)
+* A valid **Google Gemini API Key** configured in your environment.
 
-## Installation & Setup
+## 🚀 Installation & Setup
 
-### 1. Setup the Go Engine
-
-Navigate to the `go-engine` directory and run the server:
+### 1. Initialize the Go Engine
+Navigate to the engine directory, download dependencies, and ignite the server:
 
 ```bash
 cd go-engine
 go mod download
 go run cmd/server/main.go
-```
-The Go engine will start listening on `localhost`.
-
-### 2. Setup the Enterprise Interface
-
-Navigate to the `swarai-enterprise` directory, install dependencies, and start the PHP development server:
-
-```bash
-cd swarai-enterprise
-composer install
-php -S localhost:8000 -t public
-```
-The interface will be available at `No Live Link Available, We are Working on it Locally`.
-
-## Usage
-
-1. Ensure both the Go engine and the PHP frontend are running.
-2. working on it
-4. Use the interface to initiate an audio ingestion sequence. The frontend will capture the audio and send it to the Go backend.
-5. The Go backend processes the audio, interfaces with the Gemini API, and returns the translated Hindi text, which is then displayed on the UI terminal.
-
-## License
-
-This project is licensed under the MIT License.
