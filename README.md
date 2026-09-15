@@ -18,7 +18,7 @@
 
 ## 📑 Transmission Index (Table of Contents)
 1. [Project Vision](#-project-vision)
-2. [System Architecture & Data Flow](#-system-architecture--data-flow)
+2. [Technical Topologies & Schematics](#-technical-topologies--schematics)
 3. [Core Feature Matrix](#-core-feature-matrix)
 4. [System Requirements](#-system-requirements)
 5. [Directory Structure](#-directory-structure)
@@ -35,22 +35,23 @@
 
 ---
 
-## 📡 System Architecture & Data Flow
+## 📐 Technical Topologies & Schematics
 
-SwarAI operates on a decoupled architecture, ensuring that the heavy audio processing is handled by the Go engine without blocking the visual telemetry of the PHP frontend.
+To understand the scale and flow of the SwarAI pipeline, refer to the classified system schematics below.
 
-### Component Topology
+### 1. High-Level Component Topology
 ```mermaid
-graph LR
-    A[👤 User Audio] -->|Mic Input| B(🖥️ PHP/JS HUD)
-    B -->|Base64 Encoding| C{⚡ Go Core API}
-    C -->|gRPC / HTTP2| D[🧠 Gemini 3.7 Flash]
-    D -->|Hindi Text| C
-    C -->|JSON Payload| B
-    B -->|Glitch Animation| E[📟 UI Terminal Display]
-    
-    style A fill:#050a1f,stroke:#00ffcc,stroke-width:2px,color:#00ffcc
-    style B fill:#1a1a2e,stroke:#777BB4,stroke-width:2px,color:#fff
-    style C fill:#00ADD8,stroke:#fff,stroke-width:2px,color:#fff
-    style D fill:#FF6F00,stroke:#fff,stroke-width:2px,color:#fff
-    style E fill:#050a1f,stroke:#ff0055,stroke-width:2px,color:#ff0055
+sequenceDiagram
+    participant U as 👤 Commander (User)
+    participant HUD as 🖥️ Enterprise HUD
+    participant CORE as ⚙️ Go Processing Core
+    participant AI as 🧠 Neural Engine (Gemini)
+
+    U->>HUD: [Voice Uplink Initiated] Speaks English
+    Note over HUD: Acoustic Frequency Mapping<br/>Base64 Stream Conversion
+    HUD->>CORE: POST /api/translate (Base64 Payload)
+    Note over CORE: Payload Verification & Decoding
+    CORE->>AI: Prompt Injection + Audio Blob
+    AI-->>CORE: Contextual Translation (Hindi)
+    CORE-->>HUD: 200 OK: { "status": "success", "hindi": "..." }
+    HUD->>U: Render via Terminal Glitch CSS
